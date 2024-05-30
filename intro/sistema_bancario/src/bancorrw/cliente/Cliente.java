@@ -16,7 +16,28 @@ import java.util.List;
  * @author rafae
  */
 public class Cliente extends Pessoa{
+    private List<ContaInvestimento> contasIvestimento;
+    private ContaCorrente contaCorrente;
+    private String cartaoCredito;
 
+    public Cliente(int id, String nome, String cpf, LocalDate dataNascimento, String cartaoCredito) {
+        super(id, nome, cpf, dataNascimento);
+        this.cartaoCredito = cartaoCredito;
+    }
 
+    public ContaCorrente getContaCorrente() {
+        return contaCorrente;
+    }
 
+    public void setContaCorrente(ContaCorrente contaCorrente) {
+        this.contaCorrente = contaCorrente;
+    }
+
+    public String getCartaoCredito() {
+        return cartaoCredito;
+    }
+
+    public void setCartaoCredito(String cartaoCredito) {
+        this.cartaoCredito = cartaoCredito;
+    }    
 }

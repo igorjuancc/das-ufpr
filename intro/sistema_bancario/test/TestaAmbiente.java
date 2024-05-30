@@ -21,9 +21,9 @@ import static org.junit.Assert.*;
  * @author rafae
  */
 public class TestaAmbiente {
-    private final String URL="jdbc:mysql://localhost/bancorrw";
+    private final String URL="jdbc:mysql://192.168.31.115:8888/bancorrw?allowPublicKeyRetrieval=true";
     private final String USER="root";
-    private final String PWD="root";
+    private final String PWD="mysql";
     
     public TestaAmbiente() {
     }

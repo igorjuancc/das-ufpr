@@ -35,5 +35,25 @@ public abstract class Conta {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void deposita(double valor) {
+        
+    }
+    
+    public void saca(double valor) {
+        
     }    
+    
+    public void aplicaJuros() {
+        
+    }
+    
+    public long getNumero() {
+        return this.id;
+    }
 }

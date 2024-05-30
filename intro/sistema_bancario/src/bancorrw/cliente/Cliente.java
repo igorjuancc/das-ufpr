@@ -40,4 +40,12 @@ public class Cliente extends Pessoa{
     public void setCartaoCredito(String cartaoCredito) {
         this.cartaoCredito = cartaoCredito;
     }    
+
+    public List<ContaInvestimento> getContasInvestimento() {
+        return contasInvestimento;
+    }  
+    
+    public double getSaldoTotalCliente() {
+        return 0;
+    }
 }

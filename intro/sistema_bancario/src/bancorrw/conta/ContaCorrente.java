@@ -28,11 +28,16 @@ public class ContaCorrente extends Conta{
         this.limite = limite;
     }
 
-    public double getTaxaJuros() {
+    public double getTaxaJurosLimite() {
         return taxaJuros;
     }
 
-    public void setTaxaJuros(double taxaJuros) {
+    public void setTaxaJurosLimite(double taxaJuros) {
         this.taxaJuros = taxaJuros;
     }    
+    
+    @Override
+    public void aplicaJuros() {
+        
+    }
 }

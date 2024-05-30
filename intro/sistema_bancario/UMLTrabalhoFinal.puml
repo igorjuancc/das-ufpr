@@ -1,0 +1,9 @@
+@startuml
+abstract class bancorrw.cliente.Pessoa
+class bancorrw.cliente.Cliente
+class bancorrw.conta.ContaCorrente
+class bancorrw.conta.ContaInvestimento
+bancorrw.cliente.Cliente --|> bancorrw.cliente.Pessoa
+bancorrw.cliente.Cliente ..> bancorrw.conta.ContaCorrente
+bancorrw.cliente.Cliente ..> bancorrw.conta.ContaInvestimento
+@enduml

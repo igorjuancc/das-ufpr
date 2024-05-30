@@ -12,12 +12,12 @@ import bancorrw.cliente.Cliente;
  */
 public class ContaCorrente extends Conta{
     private double limite;
-    private double taxaJuros;
+    private double taxaJurosLimite;
 
-    public ContaCorrente(double limite, double taxaJuros, long id, Cliente cliente, double saldo) {
+    public ContaCorrente(double limite, double taxaJurosLimite, long id, Cliente cliente, double saldo) {
         super(id, cliente, saldo);
         this.limite = limite;
-        this.taxaJuros = taxaJuros;
+        this.taxaJurosLimite = taxaJurosLimite;
     }
 
     public double getLimite() {
@@ -29,11 +29,11 @@ public class ContaCorrente extends Conta{
     }
 
     public double getTaxaJurosLimite() {
-        return taxaJuros;
+        return taxaJurosLimite;
     }
 
     public void setTaxaJurosLimite(double taxaJuros) {
-        this.taxaJuros = taxaJuros;
+        this.taxaJurosLimite = taxaJuros;
     }    
     
     @Override

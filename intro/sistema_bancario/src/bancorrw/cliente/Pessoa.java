@@ -11,19 +11,19 @@ import java.time.LocalDate;
  * @author rafae
  */
 public abstract class Pessoa {
-    private int id;
+    private long id;
     private String nome;
     private String cpf;
     private LocalDate dataNascimento;
 
-    public Pessoa(int id, String nome, String cpf, LocalDate dataNascimento) {
+    public Pessoa(long id, String nome, String cpf, LocalDate dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

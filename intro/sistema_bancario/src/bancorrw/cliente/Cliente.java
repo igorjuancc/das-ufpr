@@ -16,11 +16,11 @@ import java.util.List;
  * @author rafae
  */
 public class Cliente extends Pessoa{
-    private List<ContaInvestimento> contasIvestimento;
+    private List<ContaInvestimento> contasInvestimento;
     private ContaCorrente contaCorrente;
     private String cartaoCredito;
 
-    public Cliente(int id, String nome, String cpf, LocalDate dataNascimento, String cartaoCredito) {
+    public Cliente(long id, String nome, String cpf, LocalDate dataNascimento, String cartaoCredito) {
         super(id, nome, cpf, dataNascimento);
         this.cartaoCredito = cartaoCredito;
     }

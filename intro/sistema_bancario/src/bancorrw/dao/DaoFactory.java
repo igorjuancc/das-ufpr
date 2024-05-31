@@ -15,15 +15,30 @@ public class DaoFactory {
     }
     
     public static ClienteDao getClienteDao(DaoType type){
-        throw new RuntimeException("Não implementado. Implemente aqui");
+        switch(type) {
+            case SQL:
+                return ClienteDaoSql.getClienteDaoSql();
+            default: 
+                throw new RuntimeException("Tipo não existe:" + type);                
+        }        
     }
     
     public static ContaCorrenteDao getContaCorrenteDao(DaoType type){
-        throw new RuntimeException("Não implementado. Implemente aqui");
+        switch(type) {
+            case SQL:
+                return ContaCorrenteDaoSql.getContaCorrenteDaoSql();
+            default: 
+                throw new RuntimeException("Tipo não existe:" + type);                
+        } 
     }
     
     public static ContaInvestimentoDao getContaInvestimentoDao(DaoType type){
-        throw new RuntimeException("Não implementado. Implemente aqui");
+        switch(type) {
+            case SQL:
+                return ContaInvestimentoDaoSql.getContaInvestimentoDaoSql();
+            default: 
+                throw new RuntimeException("Tipo não existe:" + type);                
+        } 
     }
     
 }

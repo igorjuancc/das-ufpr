@@ -36,9 +36,9 @@ public class TesteBancoRrw{
     private ContaInvestimentoDao invDao;
     
     public TesteBancoRrw() {
-        /*cliDao = DaoFactory.getClienteDao(DaoType.SQL);
+        cliDao = DaoFactory.getClienteDao(DaoType.SQL);
         corDao = DaoFactory.getContaCorrenteDao(DaoType.SQL);
-        invDao = DaoFactory.getContaInvestimentoDao(DaoType.SQL);*/
+        invDao = DaoFactory.getContaInvestimentoDao(DaoType.SQL);
     }
     
     @BeforeClass
@@ -66,6 +66,7 @@ public class TesteBancoRrw{
         }
         //exlcui todos os registros do BD
         cliDao.deleteAll();
+        corDao.deleteAll();
     }
     @Test
     public void t01verificaEstruturaClassePessoa() throws ClassNotFoundException {
@@ -501,7 +502,7 @@ public class TesteBancoRrw{
         
      }
 
-        @Test
+    @Test
     public void t31crudContaInvestimentoAdd() throws Exception {
         inicializaBD();
         //Adiciona conta no BD

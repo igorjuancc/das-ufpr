@@ -9,6 +9,7 @@ import bancorrw.conta.ContaCorrente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,7 +24,10 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao{
     }
     private static ContaCorrenteDaoSql dao;
     public static ContaCorrenteDaoSql getContaCorrenteDaoSql(){
-        throw new RuntimeException("Não implementado. Implemente aqui");
+        if (dao == null)
+            return dao = new ContaCorrenteDaoSql();            
+        else           
+            return dao;   
     } 
     private String insertContaCorrente = 
         "INSERT INTO " +
@@ -144,37 +148,140 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao{
     private final String ressetAIContas = "ALTER TABLE contas AUTO_INCREMENT =1";
     @Override
     public void add(ContaCorrente contaCorrente) throws Exception {
-        throw new RuntimeException("Não implementado. Implemente aqui");
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement stmtAdicionaConta = connection.prepareStatement(insertConta, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement stmtAdicionaCorrente = connection.prepareStatement(insertContaCorrente)) {
+            stmtAdicionaConta.setLong(1, contaCorrente.getCliente().getId());
+            stmtAdicionaConta.setDouble(2, contaCorrente.getSaldo());
+            stmtAdicionaConta.execute();
+            
+            ResultSet rs = stmtAdicionaConta.getGeneratedKeys();
+            rs.next();
+            long id = rs.getLong(1);
+            contaCorrente.setId(id);  
+            
+            stmtAdicionaCorrente.setLong(1, contaCorrente.getId());
+            stmtAdicionaCorrente.setDouble(2, contaCorrente.getLimite());
+            stmtAdicionaCorrente.setDouble(3, contaCorrente.getTaxaJurosLimite());
+            stmtAdicionaCorrente.execute();    
+            
+            ClienteDao clienteDao = DaoFactory.getClienteDao(DaoType.SQL);
+            clienteDao.update(contaCorrente.getCliente());
+        } 
     }
 
     @Override
     public List<ContaCorrente> getAll() throws Exception {
-        throw new RuntimeException("Não implementado. Implemente aqui");    
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement stmtLista = connection.prepareStatement(selectAll);
+                ResultSet rs = stmtLista.executeQuery()) {
+            List<ContaCorrente> contas = new ArrayList();
+            while (rs.next()) {
+                long idConta = rs.getLong("id_conta");
+                double saldoConta = rs.getDouble("saldo");
+                double limiteConta = rs.getDouble("limite");
+                double taxaJurosLimiteConta = rs.getDouble("taxa_juros_limite");
+                long idCliente = rs.getLong("id_cliente");
+                String nomeCliente = rs.getString("nome");
+                String cpfCliente = rs.getString("cpf");
+                LocalDate dataNascimentoCliente = rs.getDate("data_nascimento").toLocalDate();
+                String cartaoCreditoCliente = rs.getString("cartao_credito");
+                    
+                Cliente cliente = new Cliente(idCliente, nomeCliente, cpfCliente, dataNascimentoCliente, cartaoCreditoCliente);
+                ContaCorrente contaCorrente = new ContaCorrente(limiteConta, taxaJurosLimiteConta, idConta, cliente, saldoConta); 
+                contas.add(contaCorrente);
+            }
+            return contas;            
+        }    
     }
 
     @Override
     public ContaCorrente getById(long id) throws Exception {
-        throw new RuntimeException("Não implementado. Implemente aqui");   
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement stmtLista = connection.prepareStatement(selectById)) {
+            stmtLista.setLong(1, id);
+            try (ResultSet rs = stmtLista.executeQuery()) {
+                if (rs.next()) {
+                    long idConta = rs.getLong("id_conta");
+                    double saldoConta = rs.getDouble("saldo");
+                    double limiteConta = rs.getDouble("limite");
+                    double taxaJurosLimiteConta = rs.getDouble("taxa_juros_limite");
+                    long idCliente = rs.getLong("id_cliente");
+                    String nomeCliente = rs.getString("nome");
+                    String cpfCliente = rs.getString("cpf");
+                    LocalDate dataNascimentoCliente = rs.getDate("data_nascimento").toLocalDate();
+                    String cartaoCreditoCliente = rs.getString("cartao_credito");
+                    
+                    Cliente cliente = new Cliente(idCliente, nomeCliente, cpfCliente, dataNascimentoCliente, cartaoCreditoCliente);
+                    return new ContaCorrente(limiteConta, taxaJurosLimiteConta, idConta, cliente, saldoConta);
+                } else {
+                    throw new SQLException("Conta corrente não encontrado com id=" + id);
+                }               
+            }             
+        }  
     }
 
     @Override
     public void update(ContaCorrente contaCorrente) throws Exception {
-        throw new RuntimeException("Não implementado. Implemente aqui");
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement stmtAtualizaConta = connection.prepareStatement(updateConta);
+                PreparedStatement stmtAtualizaContaCorrente = connection.prepareStatement(updateContaCorrente)) {
+            stmtAtualizaConta.setDouble(1, contaCorrente.getSaldo());
+            stmtAtualizaConta.setLong(2, contaCorrente.getId());
+            stmtAtualizaConta.execute();
+            
+            stmtAtualizaContaCorrente.setDouble(1, contaCorrente.getLimite());
+            stmtAtualizaContaCorrente.setDouble(2, contaCorrente.getTaxaJurosLimite());
+            stmtAtualizaContaCorrente.setLong(3, contaCorrente.getId());
+            stmtAtualizaContaCorrente.execute();             
+        } 
     }
 
     @Override
     public void delete(ContaCorrente contaCorrente) throws Exception {
-        throw new RuntimeException("Não implementado. Implemente aqui");
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement stmtExcluir = connection.prepareStatement(deleteById)) {
+            stmtExcluir.setLong(1, contaCorrente.getId());
+            stmtExcluir.execute();
+            contaCorrente.setId(-1);
+        }
     }
 
     @Override
     public void deleteAll() throws Exception {
-        throw new RuntimeException("Não implementado. Implemente aqui");
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement stmtExcluir = connection.prepareStatement(deleteAll)) {
+            stmtExcluir.executeUpdate();
+        }
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement stmtRessetAIContas = connection.prepareStatement(ressetAIContas)) {
+            stmtRessetAIContas.executeUpdate();
+        }
     }
 
     @Override
     public ContaCorrente getContaCorrenteByCliente(Cliente cliente) throws Exception{
-        throw new RuntimeException("Não implementado. Implemente aqui");   
-    }
-    
+         try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement stmtLista = connection.prepareStatement(selectById)) {
+            stmtLista.setLong(1, cliente.getId());
+            try (ResultSet rs = stmtLista.executeQuery()) {
+                if (rs.next()) {
+                    long idConta = rs.getLong("id_conta");
+                    double saldoConta = rs.getDouble("saldo");
+                    double limiteConta = rs.getDouble("limite");
+                    double taxaJurosLimiteConta = rs.getDouble("taxa_juros_limite");
+                    long idCliente = rs.getLong("id_cliente");
+                    String nomeCliente = rs.getString("nome");
+                    String cpfCliente = rs.getString("cpf");
+                    LocalDate dataNascimentoCliente = rs.getDate("data_nascimento").toLocalDate();
+                    String cartaoCreditoCliente = rs.getString("cartao_credito");
+                    
+                    cliente = new Cliente(idCliente, nomeCliente, cpfCliente, dataNascimentoCliente, cartaoCreditoCliente);
+                    return new ContaCorrente(limiteConta, taxaJurosLimiteConta, idConta, cliente, saldoConta);
+                } else {
+                    throw new SQLException("Conta corrente de cliente não encontrado com id=" + cliente.getId());
+                }               
+            }             
+        }    
+    }    
 }

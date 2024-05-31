@@ -21,10 +21,20 @@ public class ConnectionFactory {
     }
     public static Connection getConnection() throws 
             SQLException, IOException{
-        throw new RuntimeException("Não implementado. Implemente aqui");
+        readProperties();
+        String url = properties.getProperty("db.url");
+        String user = properties.getProperty("db.user");
+        String pwd = properties.getProperty("db.pwd");
+        return DriverManager.getConnection(url, user, pwd);
     }
+    
     private static void readProperties() throws IOException
     {
-        throw new RuntimeException("Não implementado. Implemente aqui");
+        if (properties == null) {
+            Properties props = new Properties();
+            FileInputStream file = new FileInputStream("./src/bancorrw/dao/DataBase.properties");
+            props.load(file);
+            properties = props;
+        }
     }
 }

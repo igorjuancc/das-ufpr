@@ -8,7 +8,6 @@ import bancorrw.conta.ContaCorrente;
 import bancorrw.conta.ContaInvestimento;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,6 +22,7 @@ public class Cliente extends Pessoa{
     public Cliente(long id, String nome, String cpf, LocalDate dataNascimento, String cartaoCredito) {
         super(id, nome, cpf, dataNascimento);
         this.cartaoCredito = cartaoCredito;
+        this.contasInvestimento = new ArrayList();
     }
 
     public ContaCorrente getContaCorrente() {
@@ -30,6 +30,10 @@ public class Cliente extends Pessoa{
     }
 
     public void setContaCorrente(ContaCorrente contaCorrente) {
+        if ((this.contaCorrente != null) && (this.contaCorrente.getSaldo() != 0)) {
+            throw new RuntimeException("Não pode modificar a conta corrente, pois saldo da original não está zerado. "
+                    + "Para fazer isso primeiro zere o saldo da conta do cliente. Saldo=" + this.contaCorrente.getSaldo());            
+        } 
         this.contaCorrente = contaCorrente;
     }
 
@@ -46,6 +50,16 @@ public class Cliente extends Pessoa{
     }  
     
     public double getSaldoTotalCliente() {
-        return 0;
+        double total = 0;
+        for (ContaInvestimento ci : this.contasInvestimento) {
+            total += ci.getSaldo();
+        }
+        return total;
+    }
+    
+    public void addContaInvestimento(ContaInvestimento contaInvestimento) {
+        if (this.contasInvestimento == null)
+            this.contasInvestimento = new ArrayList();
+        this.contasInvestimento.add(contaInvestimento);
     }
 }

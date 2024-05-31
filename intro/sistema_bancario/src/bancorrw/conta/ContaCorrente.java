@@ -16,12 +16,6 @@ public class ContaCorrente extends Conta{
 
     public ContaCorrente(double limite, double taxaJurosLimite, long id, Cliente cliente, double saldo) {       
         super(id, cliente, saldo);
-        
-        if ((cliente.getContaCorrente() != null) && (cliente.getContaCorrente().getSaldo() != 0)) {
-            throw new RuntimeException("Não pode modificar a conta corrente, pois saldo da original não está zerado. "
-                    + "Para fazer isso primeiro zere o saldo da conta do cliente. Saldo=" + cliente.getContaCorrente().getSaldo());            
-        } 
-        
         this.limite = limite;
         this.taxaJurosLimite = taxaJurosLimite;
         cliente.setContaCorrente(this); 

@@ -17,12 +17,12 @@ public class ContaInvestimento extends Conta{
 
     public ContaInvestimento(double taxaRemuneracaoInvestimento, double montanteMinimo, double depositoMinimo, double saldo, long id, Cliente cliente) {
         super(id, cliente, saldo);
-        if (super.getSaldo() < montanteMinimo) {
+        if (super.getSaldo() < montanteMinimo)
             throw new RuntimeException("Saldo não pode ser menor que montante mínimo.");
-        }
         this.taxaRemuneracaoInvestimento = taxaRemuneracaoInvestimento;
         this.montanteMinimo = montanteMinimo;
         this.depositoMinimo = depositoMinimo;
+        this.getCliente().addContaInvestimento(this);
     }
 
     public double getTaxaRemuneracaoInvestimento() {

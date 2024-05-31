@@ -14,10 +14,17 @@ public class ContaCorrente extends Conta{
     private double limite;
     private double taxaJurosLimite;
 
-    public ContaCorrente(double limite, double taxaJurosLimite, long id, Cliente cliente, double saldo) {
+    public ContaCorrente(double limite, double taxaJurosLimite, long id, Cliente cliente, double saldo) {       
         super(id, cliente, saldo);
+        
+        if ((cliente.getContaCorrente() != null) && (cliente.getContaCorrente().getSaldo() != 0)) {
+            throw new RuntimeException("Não pode modificar a conta corrente, pois saldo da original não está zerado. "
+                    + "Para fazer isso primeiro zere o saldo da conta do cliente. Saldo=" + cliente.getContaCorrente().getSaldo());            
+        } 
+        
         this.limite = limite;
         this.taxaJurosLimite = taxaJurosLimite;
+        cliente.setContaCorrente(this); 
     }
 
     public double getLimite() {
@@ -38,6 +45,24 @@ public class ContaCorrente extends Conta{
     
     @Override
     public void aplicaJuros() {
+        if (super.getSaldo() < 0) {
+            double valorJuros = super.getSaldo() * this.taxaJurosLimite;
+            this.saca(valorJuros * -1);            
+        }        
+    }
+
+    @Override
+    public void saca(double valor) {
+        if (valor <= 0) {            
+            throw new RuntimeException("Valor do saque não pode ser negativo ou zero. Valor=" + valor); 
+        }
         
+        double limiteDisponivel = this.getSaldo() + this.getLimite();
+        
+        if (limiteDisponivel < valor) {            
+            throw new RuntimeException("Saldo insuficiente na conta." + "\nValor saque=" + valor + "\nSaldo=" + this.getSaldo() + "\nLimite=" + this.getLimite());                      
+        } else {
+            super.saca(valor);
+        }
     }
 }

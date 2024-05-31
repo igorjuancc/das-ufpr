@@ -42,16 +42,18 @@ public abstract class Conta {
     }
 
     public void deposita(double valor) {
-        
+        if (valor <= 0) {
+            throw new RuntimeException("Valor do depósito não pode ser negativo ou zero. Valor=" + valor);
+        } else {
+            this.saldo += valor;
+        }        
     }
     
     public void saca(double valor) {
-        
+        this.saldo -= valor;        
     }    
     
-    public void aplicaJuros() {
-        
-    }
+    public abstract void aplicaJuros(); 
     
     public long getNumero() {
         return this.id;

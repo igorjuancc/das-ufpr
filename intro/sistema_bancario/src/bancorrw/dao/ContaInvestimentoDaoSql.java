@@ -265,7 +265,6 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao{
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement stmtLista = connection.prepareStatement(selectAll);
                 ResultSet rs = stmtLista.executeQuery()) {
-            List<ContaInvestimento> contas = new ArrayList();
             while (rs.next()) {
                 long idConta = rs.getLong("id_conta");
                 double saldoConta = rs.getDouble("saldo");
@@ -282,11 +281,10 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao{
                 cliente.setNome(nomeCliente);
                 cliente.setCpf(cpfCliente);
                 cliente.setDataNascimento(dataNascimentoCliente);
-                cliente.setCartaoCredito(cartaoCreditoCliente);
-                ContaInvestimento ci = new ContaInvestimento(taxaConta, montanteConta, depositoConta, saldoConta, idConta, cliente);
-                contas.add(ci);
+                cliente.setCartaoCredito(cartaoCreditoCliente);                
+                ContaInvestimento contaInvestimento = new ContaInvestimento(taxaConta, montanteConta, depositoConta, saldoConta, idConta, cliente);
             }
-            return contas;            
+            return cliente.getContasInvestimento();            
         }            
     }    
 }

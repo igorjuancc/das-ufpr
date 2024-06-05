@@ -14,7 +14,8 @@ import java.util.List;
  *
  * @author rafae
  */
-public class Cliente extends Pessoa{
+public class Cliente extends Pessoa {
+
     private List<ContaInvestimento> contasInvestimento;
     private ContaCorrente contaCorrente;
     private String cartaoCredito;
@@ -30,10 +31,12 @@ public class Cliente extends Pessoa{
     }
 
     public void setContaCorrente(ContaCorrente contaCorrente) {
-        if ((this.contaCorrente != null) && (this.contaCorrente.getSaldo() != 0)) {
+        if ((this.contaCorrente != null)
+                && (this.contaCorrente.getSaldo() != 0)
+                && (this.contaCorrente.getId() == -1)) {
             throw new RuntimeException("Não pode modificar a conta corrente, pois saldo da original não está zerado. "
-                    + "Para fazer isso primeiro zere o saldo da conta do cliente. Saldo=" + this.contaCorrente.getSaldo());            
-        } 
+                    + "Para fazer isso primeiro zere o saldo da conta do cliente. Saldo=" + this.contaCorrente.getSaldo());
+        }
         this.contaCorrente = contaCorrente;
     }
 
@@ -43,12 +46,12 @@ public class Cliente extends Pessoa{
 
     public void setCartaoCredito(String cartaoCredito) {
         this.cartaoCredito = cartaoCredito;
-    }    
+    }
 
     public List<ContaInvestimento> getContasInvestimento() {
         return contasInvestimento;
-    }  
-    
+    }
+
     public double getSaldoTotalCliente() {
         double total = 0;
         for (ContaInvestimento ci : this.contasInvestimento) {
@@ -56,10 +59,24 @@ public class Cliente extends Pessoa{
         }
         return total;
     }
-    
+
     public void addContaInvestimento(ContaInvestimento contaInvestimento) {
-        if (this.contasInvestimento == null)
+        if (this.contasInvestimento == null) {
             this.contasInvestimento = new ArrayList();
-        this.contasInvestimento.add(contaInvestimento);
+        }
+        ContaInvestimento buscarConta = null;
+        if (contaInvestimento.getId() != -1) {
+            for (int i = 0; i < this.contasInvestimento.size(); i++) {
+                buscarConta = this.contasInvestimento.get(i);
+                if (buscarConta.getId() == contaInvestimento.getId()) {
+                    this.contasInvestimento.set(i, contaInvestimento);
+                    break;
+                }
+            }
+            if (buscarConta == null) 
+                this.contasInvestimento.add(contaInvestimento); 
+        } else {
+            this.contasInvestimento.add(contaInvestimento);            
+        }        
     }
 }

@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Pessoa</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
+</div>
+<div class="modal-body">
+    <p>Nome: {{ pessoa.nome }} </p>
+    <p>Idade: {{ pessoa.idade }}</p>
+    <p>Data Nascimento: {{ pessoa.dataDeNascimento! | mask: 'd0/M0/0000'}} </p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Fechar</button>
+</div>

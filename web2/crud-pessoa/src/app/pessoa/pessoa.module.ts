@@ -9,13 +9,15 @@ import { InserirPessoaComponent } from './inserir-pessoa';
 import { EditarPessoaComponent } from './editar-pessoa';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { SharedModule } from '../shared';
+import { ModalPessoaComponent } from './modal-pessoa/modal-pessoa.component';
 
 
 @NgModule({
   declarations: [
     ListarPessoaComponent,
     InserirPessoaComponent,
-    EditarPessoaComponent
+    EditarPessoaComponent,
+    ModalPessoaComponent
   ],
   imports: [
     CommonModule,

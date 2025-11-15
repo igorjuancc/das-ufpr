@@ -5,6 +5,7 @@ import { ListarEnderecoComponent } from './listar-endereco';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { EditarEnderecoComponent } from './editar-endereco';
+import { ModalEnderecoComponent } from './modal-endereco/modal-endereco.component';
 
 
 
@@ -12,7 +13,8 @@ import { EditarEnderecoComponent } from './editar-endereco';
   declarations: [
     InserirEnderecoComponent,
     ListarEnderecoComponent,
-    EditarEnderecoComponent
+    EditarEnderecoComponent,
+    ModalEnderecoComponent
   ],
   imports: [
     CommonModule,

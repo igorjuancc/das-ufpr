@@ -24,6 +24,9 @@
             <td> {{endereco.cidade}} </td>
             <td> {{endereco.estado}} </td>
             <td class="text-center" style="width: 300px">
+                <button type="button" class="btn btn-xs btn-info" (click)="abrirModalEndereco(endereco)">
+                    <i class="fa fa-eye" aria-hidden="true"></i> Ver
+                </button>
                 <a [routerLink]="['/enderecos/editar', endereco.id]" href="#" title="Editar" alt="Editar"
                     class="btn btn-xs btn-info">
                     <i class="fa fa-edit" aria-hidden="true"></i> Editar

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { EstadoService } from '../services';
 import { Estado } from '../../shared';
+import { ModalEstadoComponent } from '../modal-estado';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-listar-estado',
@@ -11,7 +13,9 @@ import { Estado } from '../../shared';
 export class ListarEstadoComponent {
   estados: Estado[] = [];
 
-  constructor(private estadoService: EstadoService) { }
+  constructor(private estadoService: EstadoService,
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit(): void {
     this.estados = this.listarTodos();
@@ -35,6 +39,11 @@ export class ListarEstadoComponent {
       this.estadoService.remover(estado.id!);
       this.estados = this.listarTodos();
     }
+  }
+
+  abrirModalEstado(estado: Estado) {
+    const modalRef = this.modalService.open(ModalEstadoComponent);
+    modalRef.componentInstance.estado = estado;
   }
 
 }

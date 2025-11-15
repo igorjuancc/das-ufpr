@@ -38,6 +38,37 @@
                 </div>
             </div>
             <div class="form-group">
+                <table border="0">
+                    <tr>
+                        <td rowspan="4" style="vertical-align: top;">
+                            <label for="motorista">Cart. Motorista:</label>
+                        </td>
+                        <td>
+                            <input type="radio" class="form-check-input" id="motorista1" name="motorista"
+                                [(ngModel)]="pessoa.motorista" #motorista1="ngModel" value="Não"> Não
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" class="form-check-input" id="motorista2" name="motorista"
+                                [(ngModel)]="pessoa.motorista" #motorista2="ngModel" value="A"> A
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" class="form-check-input" id="motorista3" name="motorista"
+                                [(ngModel)]="pessoa.motorista" #motorista3="ngModel" value="B"> B
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" class="form-check-input" id="motorista4" name="motorista"
+                                [(ngModel)]="pessoa.motorista" #motorista4="ngModel" value="AB"> AB
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="form-group">
                 <button type="button" class="btn btn-primary" (click)="atualizar()" [disabled]="!formPessoa.form.valid">
                     <i class="fa fa-save" aria-hidden="true"></i> Atualizar
                 </button>

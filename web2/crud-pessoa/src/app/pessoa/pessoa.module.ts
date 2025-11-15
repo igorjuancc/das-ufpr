@@ -9,6 +9,7 @@ import { InserirPessoaComponent } from './inserir-pessoa/inserir-pessoa.componen
 import { EditarPessoaComponent } from './editar-pessoa/editar-pessoa.component';
 import { NumericoDirective } from '../shared/directives/numerico.directive';
 import { MinimoValidatorDirective } from '../shared/directives/minimo-validator.directive';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 
 @NgModule({
@@ -22,10 +23,13 @@ import { MinimoValidatorDirective } from '../shared/directives/minimo-validator.
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
-  providers : [
-    PessoaService
+  providers: [
+    PessoaService,
+    provideNgxMask()
   ]
 })
 export class PessoaModule { }

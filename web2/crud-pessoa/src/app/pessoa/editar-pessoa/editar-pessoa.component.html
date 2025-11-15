@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label for="idade">Idade:</label>
                 <input type="text" class="form-control" id="idade" name="idade" [(ngModel)]="pessoa.idade"
-                    #idade="ngModel" required>
+                    #idade="ngModel" numerico required>
                 <div *ngIf="idade.errors && (idade.dirty || idade.touched)" class="alert alert-danger">
                     <div [hidden]="!idade.errors['required']">
                         Digite a idade da pessoa.

@@ -12,24 +12,25 @@
         </div>
         <div class="form-group">
             <label for="numero">Número:</label>
-            <input type="text" class="form-control" id="numero" name="numero" [(ngModel)]="endereco.numero" #numero="ngModel"
-                required>
+            <input type="text" class="form-control" id="numero" name="numero" [(ngModel)]="endereco.numero"
+                #numero="ngModel" required>
             <div *ngIf="numero.errors && (numero.dirty || numero.touched)" class="alert alert-danger">
                 <div [hidden]="! numero.errors['required']"> Digite o número do endereço. </div>
             </div>
         </div>
         <div class="form-group">
             <label for="nome">Complemento:</label>
-            <input type="text" class="form-control" id="complemento" name="complemento" [(ngModel)]="endereco.complemento" #complemento="ngModel"
-                minlength="2">
+            <input type="text" class="form-control" id="complemento" name="complemento"
+                [(ngModel)]="endereco.complemento" #complemento="ngModel" minlength="2">
             <div *ngIf="complemento.errors && (complemento.dirty || complemento.touched)" class="alert alert-danger">
-                <div [hidden]="!complemento.errors['minlength']"> O complemento deve conter ao menos 2 caracteres. </div>
+                <div [hidden]="!complemento.errors['minlength']"> O complemento deve conter ao menos 2 caracteres.
+                </div>
             </div>
         </div>
         <div class="form-group">
             <label for="nome">Bairro:</label>
-            <input type="text" class="form-control" id="bairro" name="bairro" [(ngModel)]="endereco.bairro" #bairro="ngModel"
-                minlength="2" required>
+            <input type="text" class="form-control" id="bairro" name="bairro" [(ngModel)]="endereco.bairro"
+                #bairro="ngModel" minlength="2" required>
             <div *ngIf="bairro.errors && (bairro.dirty || bairro.touched)" class="alert alert-danger">
                 <div [hidden]="!bairro.errors['required']"> Digite o nome do bairro. </div>
                 <div [hidden]="!bairro.errors['minlength']"> O nome do bairro deve conter ao menos 2 caracteres. </div>
@@ -47,8 +48,8 @@
         </div>
         <div class="form-group">
             <label for="nome">Cidade:</label>
-            <input type="text" class="form-control" id="cidade" name="cidade" [(ngModel)]="endereco.cidade" #cidade="ngModel"
-                minlength="2" required>
+            <input type="text" class="form-control" id="cidade" name="cidade" [(ngModel)]="endereco.cidade"
+                #cidade="ngModel" minlength="2" required>
             <div *ngIf="cidade.errors && (cidade.dirty || cidade.touched)" class="alert alert-danger">
                 <div [hidden]="!cidade.errors['required']"> Digite o nome da cidade. </div>
                 <div [hidden]="!cidade.errors['minlength']"> O nome da cidade deve conter ao menos 2 caracteres. </div>
@@ -56,13 +57,19 @@
         </div>
         <div class="form-group">
             <label for="nome">Estado:</label>
-            <input type="text" class="form-control" id="estado" name="estado" [(ngModel)]="endereco.estado" #estado="ngModel"
-                minlength="2" maxlength="2" required>
+            <input type="text" class="form-control" id="estado" name="estado" [(ngModel)]="endereco.estado"
+                #estado="ngModel" minlength="2" maxlength="2" required>
             <div *ngIf="estado.errors && (estado.dirty || estado.touched)" class="alert alert-danger">
                 <div [hidden]="!estado.errors['required']"> Digite a sigla do estado. </div>
                 <div [hidden]="!estado.errors['minlength']"> A sigla do estado deve conter ao menos 2 caracteres. </div>
-                <div [hidden]="!estado.errors['maxlength']"> A sigla do estado deve conter no máximo 2 caracteres. </div>
+                <div [hidden]="!estado.errors['maxlength']"> A sigla do estado deve conter no máximo 2 caracteres.
+                </div>
             </div>
+        </div>
+        <div class="form-group">
+            <label for="residencial">Residencial:</label>
+            <input type="checkbox" class="form-check-input" id="residencial" name="residencial"
+                [(ngModel)]="endereco.residencial" #residencial="ngModel">
         </div>
         <div class="form-group">
             <button type="button" class="btn btn-primary" (click)="atualizar()" [disabled]="!formEndereco.form.valid">

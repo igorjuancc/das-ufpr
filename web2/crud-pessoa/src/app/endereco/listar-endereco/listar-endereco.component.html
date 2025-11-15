@@ -9,6 +9,7 @@
             <th>CEP</th>
             <th>Cidade</th>
             <th>Estado</th>
+            <th>Residencial?</th>
             <th class="text-center">
                 <a [routerLink]="['/enderecos/novo']" href="#" title="Novo" alt="Novo" class="btn btn-xs btn-success">
                     <i class="fa fa-plus" aria-hidden="true"></i> Novo
@@ -23,6 +24,7 @@
             <td> {{endereco.cep}} </td>
             <td> {{endereco.cidade}} </td>
             <td> {{endereco.estado}} </td>
+            <td> {{endereco.residencial! ? "Residencial" : "Comercial"}} </td>
             <td class="text-center" style="width: 300px">
                 <button type="button" class="btn btn-xs btn-info" (click)="abrirModalEndereco(endereco)">
                     <i class="fa fa-eye" aria-hidden="true"></i> Ver

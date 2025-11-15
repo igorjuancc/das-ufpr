@@ -10,6 +10,7 @@
     <p>CEP: {{ endereco.cep }} </p>
     <p>Cidade: {{ endereco.cidade }} </p>
     <p>Estado: {{ endereco.estado }} </p>
+    <p>{{ endereco.residencial! ? "Residencial" : "Comercial" }} </p>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Fechar</button>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Endereco } from '../../shared/models/endereco.model';
+import { Endereco } from '../../shared';
 
 const LS_CHAVE = "enderecos";
 

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EditarCidadeComponent } from './editar-cidade/editar-cidade.component';
-import { ListarCidadeComponent } from './listar-cidade/listar-cidade.component';
-import { InserirCidadeComponent } from './inserir-cidade/inserir-cidade.component';
+import { EditarCidadeComponent } from './editar-cidade';
+import { ListarCidadeComponent } from './listar-cidade';
+import { InserirCidadeComponent } from './inserir-cidade';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 

@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Endereco } from '../../shared/models/endereco.model';
-import { EnderecoService } from '../services/endereco.service';
+import { Endereco } from '../../shared';
+import { EnderecoService } from '../services';
 import { Router } from '@angular/router';
 
 @Component({

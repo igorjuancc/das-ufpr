@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Cidade } from '../../shared/models/cidade.model';
+import { Cidade } from '../../shared';
 
 const LS_CHAVE = "cidades";
 

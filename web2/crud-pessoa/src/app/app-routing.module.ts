@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListarPessoaComponent } from './pessoa/listar-pessoa/listar-pessoa.component';
-import { InserirPessoaComponent } from './pessoa/inserir-pessoa/inserir-pessoa.component';
-import { EditarPessoaComponent } from './pessoa/editar-pessoa/editar-pessoa.component';
-import { ListarEnderecoComponent } from './endereco/listar-endereco/listar-endereco.component';
-import { InserirEnderecoComponent } from './endereco/inserir-endereco/inserir-endereco.component';
-import { EditarEnderecoComponent } from './endereco/editar-endereco/editar-endereco.component';
-import { ListarCidadeComponent } from './cidade/listar-cidade/listar-cidade.component';
-import { InserirCidadeComponent } from './cidade/inserir-cidade/inserir-cidade.component';
-import { EditarCidadeComponent } from './cidade/editar-cidade/editar-cidade.component';
-import { ListarEstadoComponent } from './estado/listar-estado/listar-estado.component';
-import { InserirEstadoComponent } from './estado/inserir-estado/inserir-estado.component';
-import { EditarEstadoComponent } from './estado/editar-estado/editar-estado.component';
+import { ListarPessoaComponent } from './pessoa/listar-pessoa';
+import { InserirPessoaComponent } from './pessoa/inserir-pessoa';
+import { EditarPessoaComponent } from './pessoa/editar-pessoa';
+import { ListarEnderecoComponent } from './endereco/listar-endereco';
+import { InserirEnderecoComponent } from './endereco/inserir-endereco';
+import { EditarEnderecoComponent } from './endereco/editar-endereco';
+import { ListarCidadeComponent } from './cidade/listar-cidade';
+import { InserirCidadeComponent } from './cidade/inserir-cidade';
+import { EditarCidadeComponent } from './cidade/editar-cidade';
+import { ListarEstadoComponent } from './estado/listar-estado';
+import { InserirEstadoComponent } from './estado/inserir-estado';
+import { EditarEstadoComponent } from './estado/editar-estado';
 
 const routes: Routes = [
   {

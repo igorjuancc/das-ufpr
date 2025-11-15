@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InserirEstadoComponent } from './inserir-estado/inserir-estado.component';
-import { EditarEstadoComponent } from './editar-estado/editar-estado.component';
-import { ListarEstadoComponent } from './listar-estado/listar-estado.component';
+import { InserirEstadoComponent } from './inserir-estado';
+import { EditarEstadoComponent } from './editar-estado';
+import { ListarEstadoComponent } from './listar-estado';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 

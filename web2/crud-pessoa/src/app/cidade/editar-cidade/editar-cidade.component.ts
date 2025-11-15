@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { CidadeService } from '../services/cidade.service';
+import { CidadeService } from '../services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { Cidade } from '../../shared/models/cidade.model';
+import { Cidade } from '../../shared';
 
 @Component({
   selector: 'app-editar-cidade',

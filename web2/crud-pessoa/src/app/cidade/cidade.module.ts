@@ -5,6 +5,7 @@ import { ListarCidadeComponent } from './listar-cidade';
 import { InserirCidadeComponent } from './inserir-cidade';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ModalCidadeComponent } from './modal-cidade/modal-cidade.component';
 
 
 
@@ -12,7 +13,8 @@ import { RouterModule } from '@angular/router';
   declarations: [
     EditarCidadeComponent,
     ListarCidadeComponent,
-    InserirCidadeComponent
+    InserirCidadeComponent,
+    ModalCidadeComponent
   ],
   imports: [
     CommonModule,

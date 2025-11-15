@@ -13,11 +13,11 @@
         <div class="form-group">
             <label for="idade">Idade:</label>
             <input type="text" class="form-control" id="idade" name="idade" [(ngModel)]="pessoa.idade" #idade="ngModel"
-                numerico minimo required>
+                numerico minimo valorMinimo="18" required>
             <div *ngIf="idade.errors && (idade.dirty || idade.touched)" class="alert alert-danger">
                 <div [hidden]="! idade.errors['required']"> Digite a idade da pessoa. </div>
                 <div [hidden]="!idade.errors['minimo']">
-                    Idade deve ser maior ou igual a 18
+                    Idade deve ser maior ou igual a {{idade.errors['requiredValue']}}.
                 </div>
             </div>
         </div>

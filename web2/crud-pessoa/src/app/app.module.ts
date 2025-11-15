@@ -10,7 +10,7 @@ import { EstadoModule } from './estado/estado.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,31 @@
+<h1>Editar Cidade</h1>
+<div class="well">
+    <form #formCidade="ngForm">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="cidade.nome" #nome="ngModel"
+                minlength="2" required>
+            <div *ngIf="nome.errors && (nome.dirty || nome.touched)" class="alert alert-danger">
+                <div [hidden]="!nome.errors['required']"> Digite o nome da cidade. </div>
+                <div [hidden]="!nome.errors['minlength']"> O nome da cidade deve conter ao menos 2 caracteres. </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="estado">Estado:</label>
+            <input type="text" class="form-control" id="estado" name="estado" [(ngModel)]="cidade.estado" #estado="ngModel"
+                minlength="2" required>
+            <div *ngIf="estado.errors && (estado.dirty || estado.touched)" class="alert alert-danger">
+                <div [hidden]="!estado.errors['required']"> Digite o nome da estado. </div>
+                <div [hidden]="!estado.errors['minlength']"> O nome do estado deve conter ao menos 2 caracteres. </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" (click)="atualizar()" [disabled]="!formCidade.form.valid">
+                <i class="fa fa-save" aria-hidden="true"></i> Atualizar
+            </button>
+            <a class="btn btn-secondary" [routerLink]="['/cidades']">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+            </a>
+        </div>
+    </form>
+</div>

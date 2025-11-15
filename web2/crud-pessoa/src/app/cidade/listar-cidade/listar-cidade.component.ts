@@ -1,0 +1,39 @@
+import { Component, OnInit } from '@angular/core';
+import { Cidade } from '../../shared/models/cidade.model';
+import { CidadeService } from '../services/cidade.service';
+
+@Component({
+  selector: 'app-listar-cidade',
+  standalone: false,
+  templateUrl: './listar-cidade.component.html',
+  styleUrl: './listar-cidade.component.css'
+})
+export class ListarCidadeComponent implements OnInit {
+  cidades: Cidade[] = [];
+
+  constructor(private cidadeService: CidadeService) { }
+  
+  ngOnInit(): void {
+    this.cidades = this.listarTodas();
+  }
+
+  listarTodas(): Cidade[] {   
+      /*
+      return [
+        new Cidade(1, "Curitiba", "Paraná"),
+        new Cidade(1, "Pinhais", "Paraná"),
+        new Cidade(1, "Florianópolis", "Santa Catarina")
+      ];
+      */
+    
+      return this.cidadeService.listarTodas();
+    }
+  
+    remover($event: any, cidade: Cidade): void {
+      $event.preventDefault();
+      if (confirm(`Deseja realmente remover a cidade ${cidade.nome} - ${cidade.estado}?`)) {
+        this.cidadeService.remover(cidade.id!);
+        this.cidades = this.listarTodas();
+      }
+    } 
+}

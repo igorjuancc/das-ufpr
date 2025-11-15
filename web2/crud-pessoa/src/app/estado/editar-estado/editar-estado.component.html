@@ -1,0 +1,32 @@
+<h1>Editar Estado</h1>
+<div class="well">
+    <form #formEstado="ngForm">        
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="estado.nome" #nome="ngModel"
+                minlength="2" required>
+            <div *ngIf="nome.errors && (nome.dirty || nome.touched)" class="alert alert-danger">
+                <div [hidden]="!nome.errors['required']"> Digite o nome do estado. </div>
+                <div [hidden]="!nome.errors['minlength']"> O nome do estado deve conter ao menos 2 caracteres. </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="sigla">Sigla:</label>
+            <input type="text" class="form-control" id="sigla" name="sigla" [(ngModel)]="estado.sigla" #sigla="ngModel"
+                minlength="2" maxlength="2" required>
+            <div *ngIf="sigla.errors && (sigla.dirty || sigla.touched)" class="alert alert-danger">
+                <div [hidden]="!sigla.errors['required']"> Digite a sigla do estado. </div>
+                <div [hidden]="!sigla.errors['minlength']"> A sigla do estado deve conter ao menos 2 caracteres. </div>
+                <div [hidden]="!sigla.errors['maxlength']"> A sigla do estado deve conter no máximo 2 caracteres. </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" (click)="atualizar()" [disabled]="!formEstado.form.valid">
+                <i class="fa fa-save" aria-hidden="true"></i> Atualizar
+            </button>
+            <a class="btn btn-secondary" [routerLink]="['/estados']">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+            </a>
+        </div>
+    </form>
+</div>

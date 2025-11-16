@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
     <p>Cidade: {{ cidade.nome }} </p>
-    <p>Estado: {{ cidade.estado }}</p>
+    <p>Estado: {{ cidade.estado?.sigla }}</p>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Fechar</button>

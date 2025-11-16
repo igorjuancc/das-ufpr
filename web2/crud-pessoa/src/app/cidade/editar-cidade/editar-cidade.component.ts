@@ -1,8 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CidadeService } from '../services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { Cidade } from '../../shared';
+import { Cidade, Estado } from '../../shared';
+import { EstadoService } from '../../estado/services';
 
 @Component({
   selector: 'app-editar-cidade',
@@ -10,21 +11,24 @@ import { Cidade } from '../../shared';
   templateUrl: './editar-cidade.component.html',
   styleUrl: './editar-cidade.component.css'
 })
-export class EditarCidadeComponent {
+export class EditarCidadeComponent implements OnInit {
   // Recebe uma referência do formulário aqui no componente
   // 'formCidade' deve ser o nome do formulário no HTML
   @ViewChild('formCidade') formCidade!: NgForm;
   // Atributo de binding, os dados digitados no formulário
   // vêm para este atributo
   cidade: Cidade = new Cidade();
+  estados: Estado[] = [];
 
   constructor(
     private cidadeService: CidadeService,
+    private estadoService: EstadoService, 
     private route: ActivatedRoute,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.estados = this.estadoService.listarTodos();
     // snapshot.params de ActivatedRoute dá acesso aos parâmetros passados
     // Operador + (antes do this) converte para número
     let id = +this.route.snapshot.params['id'];

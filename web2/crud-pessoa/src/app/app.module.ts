@@ -9,6 +9,7 @@ import { CidadeModule } from './cidade/cidade.module';
 import { EstadoModule } from './estado/estado.module';
 import { SharedModule } from './shared';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CidadeModule,
     EstadoModule,
     SharedModule,
-    NgbModule
+    NgbModule,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

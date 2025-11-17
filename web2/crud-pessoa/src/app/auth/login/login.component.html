@@ -1,0 +1,39 @@
+<h1>Login</h1>
+<div *ngIf="message" class="alert alert-danger
+alert-dismissible fade show" role="alert">
+    {{message}}
+    <a href="#" class="close" data-dismiss="alert" aria-label="close"> &times;</a>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="$event.preventDefault()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="well">
+    <form #formLogin="ngForm">
+        <div class="form-group">
+            <label for="usuario">Usuário:</label>
+            <input type="text" class="form-control" id="usuario" name="usuario" [(ngModel)]="login.login"
+                #usuario="ngModel" required>
+            <div *ngIf="usuario.errors && (usuario.dirty || usuario.touched)" class="alert alert-danger">
+                <div [hidden]="!usuario.errors['required']">
+                    Digite o usuário
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input type="password" class="form-control" id="senha" name="senha" [(ngModel)]="login.senha" #senha="ngModel"
+                required>
+            <div *ngIf="senha.errors && (senha.dirty || senha.touched)" class="alert alert-danger">
+                <div [hidden]="!senha.errors['required']">
+                    Digite a senha.
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="logar()" [disabled]="!formLogin.form.valid">
+            <i class="fa fa-save" aria-hidden="true"></i> Logar
+        </button>
+        <a class="btn btn-secondary" [routerLink]="['/autocadastro']">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Registrar
+        </a>
+    </form>
+</div>

@@ -29,7 +29,7 @@ export class InserirEditarUsuarioComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.novoUsuario = !this.id;
     if (!this.novoUsuario) {
-      this.usuarioService.buscarPorId(+this.id).subscribe(
+      this.usuarioService.buscarPorId(this.id).subscribe(
         usuario => {
           this.usuario = usuario;
           this.senhaAntiga = usuario.senha ? usuario.senha : "";

@@ -23,7 +23,7 @@ export class UsuarioService {
       this.httpOptions);
   }
 
-  buscarPorId(id: number): Observable<Usuario> {
+  buscarPorId(id: string): Observable<Usuario> {
     return this.httpClient.get<Usuario>(this.BASE_URL + id,
       this.httpOptions);
   }
@@ -34,7 +34,7 @@ export class UsuarioService {
       this.httpOptions);
   }
 
-  remover(id: number): Observable<Usuario> {
+  remover(id: string): Observable<Usuario> {
     return this.httpClient.delete<Usuario>(this.BASE_URL + id,
       this.httpOptions);
   }

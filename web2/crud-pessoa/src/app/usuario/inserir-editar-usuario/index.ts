@@ -1,0 +1,1 @@
+export * from './inserir-editar-usuario.component';

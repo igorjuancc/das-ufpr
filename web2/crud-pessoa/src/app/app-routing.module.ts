@@ -15,6 +15,8 @@ import { EditarEstadoComponent } from './estado/editar-estado';
 import { LoginComponent } from './auth/login';
 import { authGuard } from './auth/auth.guard';
 import { HomeComponent } from './home/home.component';
+import { InserirEditarUsuarioComponent } from './usuario/inserir-editar-usuario';
+import { ListarUsuarioComponent } from './usuario/listar-usuario';
 
 const routes: Routes = [
   {
@@ -145,6 +147,34 @@ const routes: Routes = [
     canActivate: [authGuard],
     data: {
       role: 'ADMIN,FUNC'
+    }
+  },
+  {
+    path: 'usuarios',
+    redirectTo: 'usuarios/listar'
+  },
+  {
+    path: 'usuarios/listar',
+    component: ListarUsuarioComponent,
+    canActivate: [authGuard],
+    data: {
+      role: 'ADMIN'
+    }
+  },
+  {
+    path: 'usuarios/novo',
+    component: InserirEditarUsuarioComponent,
+    canActivate: [authGuard],
+    data: {
+      role: 'ADMIN'
+    }
+  },
+  {
+    path: 'usuarios/editar/:id',
+    component: InserirEditarUsuarioComponent,
+    canActivate: [authGuard],
+    data: {
+      role: 'ADMIN'
     }
   }
 ];

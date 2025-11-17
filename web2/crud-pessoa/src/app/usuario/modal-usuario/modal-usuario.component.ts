@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Usuario } from '../../shared';
 
 @Component({
   selector: 'app-modal-usuario',
@@ -8,4 +10,7 @@ import { Component } from '@angular/core';
 })
 export class ModalUsuarioComponent {
 
+  @Input() usuario: Usuario = new Usuario();
+
+  constructor(public activeModal: NgbActiveModal) { }
 }

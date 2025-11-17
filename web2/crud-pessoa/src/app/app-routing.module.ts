@@ -12,12 +12,17 @@ import { EditarCidadeComponent } from './cidade/editar-cidade';
 import { ListarEstadoComponent } from './estado/listar-estado';
 import { InserirEstadoComponent } from './estado/inserir-estado';
 import { EditarEstadoComponent } from './estado/editar-estado';
+import { LoginComponent } from './auth/login';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'pessoas/listar',
+    redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'pessoas',

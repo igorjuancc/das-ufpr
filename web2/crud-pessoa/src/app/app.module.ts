@@ -10,6 +10,7 @@ import { EstadoModule } from './estado/estado.module';
 import { SharedModule } from './shared';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     EstadoModule,
     SharedModule,
     NgbModule,
-    NgSelectModule
+    NgSelectModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

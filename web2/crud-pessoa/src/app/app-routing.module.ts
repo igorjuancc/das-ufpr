@@ -14,6 +14,7 @@ import { InserirEstadoComponent } from './estado/inserir-estado';
 import { EditarEstadoComponent } from './estado/editar-estado';
 import { LoginComponent } from './auth/login';
 import { authGuard } from './auth/auth.guard';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,14 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [authGuard],
+    data: {
+      role: 'ADMIN,GERENTE,FUNC'
+    }
   },
   {
     path: 'pessoas',

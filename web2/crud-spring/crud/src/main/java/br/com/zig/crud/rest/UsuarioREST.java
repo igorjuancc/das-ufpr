@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.zig.crud.model.Login;
 import br.com.zig.crud.model.Usuario;
 
 @CrossOrigin
@@ -95,5 +96,16 @@ public class UsuarioREST {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .build();
         }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Usuario> login(@RequestBody Login login) {
+        Usuario usuario = lista.stream().filter(usu -> usu.getLogin().equals(login.getLogin()) &&
+                usu.getSenha().equals(login.getSenha())).findAny().orElse(null);
+        if (usuario == null)
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .build();
+        else
+            return ResponseEntity.ok(usuario);
     }
 }

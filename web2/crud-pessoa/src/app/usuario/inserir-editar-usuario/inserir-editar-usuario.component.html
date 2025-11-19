@@ -1,5 +1,11 @@
 <h1 *ngIf="novoUsuario">Novo Usuário</h1>
 <h1 *ngIf="!novoUsuario">Editar Usuário</h1>
+<div *ngIf="mensagem.length>0" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <h4 class="alert-heading">{{mensagem}}</h4>
+    <p>{{mensagem_detalhes}}</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close">
+    </button>
+</div>
 <div class="well">
     <form #formUsuario="ngForm">
         <div class="form-group">
@@ -43,7 +49,8 @@
                 #perfil="ngModel" value="FUNC"> Funcionário <br />
         </div>
         Módulo de Usuários
-        <button type="button" class="btn btn-primary" (click)="salvar()" [disabled]="!formUsuario.form.valid">
+        <button type="button" class="btn btn-primary" (click)="salvar()" 
+        [disabled]="!formUsuario.form.valid || botaoDesabilitado">
             <i *ngIf="!loading" class="fa fa-save" aria- hidden="true"></i>
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> Salvar
         </button>

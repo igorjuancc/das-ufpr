@@ -18,6 +18,8 @@ export class InserirPessoaComponent {
   // Atributo de binding, os dados digitados no formulário
   // vêm para este atributo
   pessoa: Pessoa = new Pessoa();
+  mensagem: string = "";
+  mensagem_detalhes: string = "";
 
   // Deve-se injetar no construtor:
   // - service, para efetuar a operação
@@ -33,8 +35,20 @@ export class InserirPessoaComponent {
   // . Redireciona para /pessoas
   inserir(): void {
     if (this.formPessoa.form.valid) {
-      this.pessoaService.inserir(this.pessoa);
-      this.router.navigate(["/pessoas"]);
+      this.pessoaService.inserir(this.pessoa).subscribe({
+        next: (pessoa) => {
+          this.router.navigate(["/pessoas"]);
+        },
+        error: (err) => {
+          this.mensagem = `Erro inserindo pessoa ${this.pessoa.nome}`;
+          if (err.status == 409) {
+            this.mensagem_detalhes = "Pessoa já existe.";
+          }
+          else {
+            this.mensagem_detalhes = `[${err.status}] ${err.message}`;
+          }
+        }
+      });
     }
   }
 

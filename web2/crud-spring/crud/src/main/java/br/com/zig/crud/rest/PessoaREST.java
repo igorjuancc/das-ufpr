@@ -64,7 +64,7 @@ public class PessoaREST {
         if (p != null) {
             p.setNome(pessoa.getNome());
             p.setIdade(pessoa.getIdade());
-            p.setDataNascimento(pessoa.getDataNascimento());
+            p.setDataDeNascimento(pessoa.getDataDeNascimento());
             p.setMotorista(pessoa.getMotorista());
             return ResponseEntity.ok(p);
         } else

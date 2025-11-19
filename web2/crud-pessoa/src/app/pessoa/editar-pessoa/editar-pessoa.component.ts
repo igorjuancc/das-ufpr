@@ -18,6 +18,10 @@ export class EditarPessoaComponent implements OnInit {
   // vêm para este atributo
   pessoa: Pessoa = new Pessoa();
 
+  mensagem: string = "";
+  mensagem_detalhes: string = "";
+  botaoDesabilitado = false;
+
   constructor(
     private pessoaService: PessoaService,
     private route: ActivatedRoute,
@@ -29,13 +33,34 @@ export class EditarPessoaComponent implements OnInit {
     // Operador + (antes do this) converte para número
     let id = +this.route.snapshot.params['id'];
     // Com o id, obtém a pessoa
+    /*
     const res = this.pessoaService.buscarPorId(id);
     if (res !== undefined)
       this.pessoa = res;
     else
       throw new Error("Pessoa não encontrada: id = " + id);
+    */
+
+    this.pessoaService.buscarPorId(+id).subscribe({
+      next: (pessoa) => {
+        if (pessoa == null) {
+          this.mensagem = `Erro buscando pessoa ${id}`;
+          this.mensagem_detalhes = `Pessoa não encontrada ${id}`;
+          this.botaoDesabilitado = true;
+        } else {
+          this.pessoa = pessoa;
+          this.botaoDesabilitado = false;
+        }
+      },
+      error: (err) => {
+        this.mensagem = `Erro buscando pessoa ${id}`;
+        this.mensagem_detalhes = `[${err.status}] ${err.message}`;
+        this.botaoDesabilitado = true;
+      }
+    });
   }
 
+  /*
   atualizar(): void {
     // Verifica se o formulário é válido
     if (this.formPessoa.form.valid) {
@@ -44,6 +69,19 @@ export class EditarPessoaComponent implements OnInit {
       // Redireciona para /pessoas/listar
       this.router.navigate(['/pessoas']);
     }
+  }
+  */
+
+  atualizar(): void {
+    this.pessoaService.atualizar(this.pessoa).subscribe({
+      next: (pessoa) => {
+        this.router.navigate(["/pessoas"]);
+      },
+      error: (err) => {
+        this.mensagem = `Erro alterando pessoa ${this.pessoa.nome}`;
+        this.mensagem_detalhes = `[${err.status}] ${err.message}`;
+      }
+    });
   }
 
 }

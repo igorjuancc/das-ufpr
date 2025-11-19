@@ -19,7 +19,7 @@ public class Pessoa {
     private int idade;
     @Setter
     @Getter
-    private String dataNascimento;
+    private String dataDeNascimento;
     @Setter
     @Getter
     private String motorista;

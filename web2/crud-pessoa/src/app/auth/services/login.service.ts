@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Login, Usuario } from '../../shared';
-import { map, Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 const LS_CHAVE: string = "usuarioLogado";
 
@@ -11,8 +11,9 @@ const LS_CHAVE: string = "usuarioLogado";
 
 export class LoginService {
 
-  BASE_URL = "http://localhost:3000/usuarios/";
+  BASE_URL = "http://localhost:8080/login";
   httpOptions = {
+    observe: "response" as "response",
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
@@ -52,6 +53,7 @@ export class LoginService {
   }
   */
 
+  /*
   login(login: Login): Observable<Usuario | null> {
     return this.httpClient.get<Usuario[]>(this.BASE_URL, this.httpOptions)
       .pipe(map(lista => {
@@ -64,5 +66,28 @@ export class LoginService {
           return null;
         }
       }));
+  }
+  */
+
+  login(login: Login): Observable<Usuario | null> {
+    console.log(login);
+    return this.httpClient.post<Usuario>(this.BASE_URL,
+      JSON.stringify(login),
+      this.httpOptions).pipe(
+        map((resp: HttpResponse<Usuario>) => {
+          if (resp.status == 200) {
+            return resp.body;
+          } else {
+            return null;
+          }
+        }),
+        catchError((err) => {
+          if (err.status == 401) {
+            return of(null);
+          } else {
+            return throwError(() => err);
+          }
+        })
+      );
   }
 }

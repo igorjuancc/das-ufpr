@@ -37,7 +37,17 @@ export class PessoaService {
           if (resp.status != 200) {
             return [];
           } else {
-            return resp.body;
+            let lista: Pessoa[] = [];
+            if (resp.body && resp.body.length > 0) {
+              let pes: Pessoa = new Pessoa();
+              // acertar as datas
+              resp.body.forEach(p => {
+                pes = new Pessoa(p.id, p.nome, p.idade, p.dataDeNascimento, p.motorista);
+                pes.dataDoRest();
+                lista.push(pes);
+              });
+            }
+            return lista;
           }
         }),
         catchError((e, c) => {
@@ -73,7 +83,16 @@ export class PessoaService {
           if (resp.status != 201) {
             return null;
           } else {
-            return resp.body;
+            // Acertar a data
+            let pes: Pessoa = new Pessoa(
+              resp.body?.id,
+              resp.body?.nome,
+              resp.body?.idade,
+              resp.body?.dataDeNascimento,
+              resp.body?.motorista);
+
+            pes.dataParaRest();
+            return pes;
           }
         }),
         catchError((e, c) => {
@@ -101,7 +120,16 @@ export class PessoaService {
           if (resp.status != 200) {
             return null;
           } else {
-            return resp.body;
+            // Acertar a data
+            let pes: Pessoa = new Pessoa(
+              resp.body?.id,
+              resp.body?.nome,
+              resp.body?.idade,
+              resp.body?.dataDeNascimento,
+              resp.body?.motorista);
+
+            pes.dataDoRest();
+            return pes;
           }
         }),
         catchError((e, c) => {
@@ -139,7 +167,16 @@ export class PessoaService {
           if (resp.status != 200) {
             return null;
           } else {
-            return resp.body;
+            // Acertar a data
+            let pes: Pessoa = new Pessoa(
+              resp.body?.id,
+              resp.body?.nome,
+              resp.body?.idade,
+              resp.body?.dataDeNascimento,
+              resp.body?.motorista);
+
+              pes.dataParaRest();
+              return pes;
           }
         }),
         catchError((e, c) => {
@@ -168,7 +205,16 @@ export class PessoaService {
           if (resp.status != 200) {
             return null;
           } else {
-            return resp.body;
+            // Acertar a data
+            let pes: Pessoa = new Pessoa(
+              resp.body?.id,
+              resp.body?.nome,
+              resp.body?.idade,
+              resp.body?.dataDeNascimento,
+              resp.body?.motorista);
+
+              pes.dataParaRest();
+              return pes;
           }
         }),
         catchError((e, c) => {

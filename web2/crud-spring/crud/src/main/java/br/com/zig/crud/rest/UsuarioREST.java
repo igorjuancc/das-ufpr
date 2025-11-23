@@ -50,7 +50,7 @@ public class UsuarioREST {
         if (op.isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(op.get());
         } else {
-            usuario.setId(-1);
+            usuario.setId(0);
             usuarioRepository.save(usuario);
             return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
         }

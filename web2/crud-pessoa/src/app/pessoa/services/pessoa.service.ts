@@ -74,7 +74,8 @@ export class PessoaService {
   }*/
 
   inserir(pessoa: Pessoa): Observable<Pessoa | null> {
-    console.log(pessoa);
+    // Acertar a data
+    pessoa.dataParaRest();
     return this.httpClient.post<Pessoa>(
       this.BASE_URL,
       JSON.stringify(pessoa),
@@ -91,7 +92,7 @@ export class PessoaService {
               resp.body?.dataDeNascimento,
               resp.body?.motorista);
 
-            pes.dataParaRest();
+            pes.dataDoRest();
             return pes;
           }
         }),
@@ -159,6 +160,8 @@ export class PessoaService {
   */
 
   atualizar(pessoa: Pessoa): Observable<Pessoa | null> {
+    // Acertar a data
+    pessoa.dataParaRest();
     return this.httpClient.put<Pessoa>(
       this.BASE_URL + "/" + pessoa.id,
       JSON.stringify(pessoa),
@@ -175,7 +178,7 @@ export class PessoaService {
               resp.body?.dataDeNascimento,
               resp.body?.motorista);
 
-              pes.dataParaRest();
+              pes.dataDoRest();
               return pes;
           }
         }),

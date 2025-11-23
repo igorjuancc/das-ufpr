@@ -26,9 +26,8 @@ export class Pessoa {
     // Converter de aaaa-mm-dd para dd/mm/aaaa
     dataDoRest() {
         if (this.dataDeNascimento) {
-            const [dia, mes, ano] = this.dataDeNascimento.split("-");
+            const [ano, mes, dia] = this.dataDeNascimento.split("-");
             this.dataDeNascimento = `${dia}/${mes}/${ano}`;
-
         }
     }
 }

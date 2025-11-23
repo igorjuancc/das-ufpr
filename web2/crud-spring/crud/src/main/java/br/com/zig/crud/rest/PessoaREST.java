@@ -1,8 +1,5 @@
 package br.com.zig.crud.rest;
 
-import java.lang.foreign.Linker.Option;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +46,7 @@ public class PessoaREST {
         if (op.isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(op.get());
         } else {
-            pessoa.setId(-1);
+            pessoa.setId(0);
             pessoaRepository.save(pessoa);
             return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
         }

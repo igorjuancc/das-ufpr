@@ -1,9 +1,12 @@
 package br.com.zig.crud.rest;
 
+import java.lang.foreign.Linker.Option;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,68 +19,60 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zig.crud.model.Pessoa;
+import br.com.zig.crud.repository.PessoaRepository;
 
 @CrossOrigin
 @RestController
 public class PessoaREST {
-    public static List<Pessoa> pessoas = new ArrayList<>();
+    @Autowired
+    private PessoaRepository pessoaRepository;
 
     @GetMapping("/pessoas")
     public ResponseEntity<List<Pessoa>> obterTodasPessoas() {
-        return ResponseEntity.ok(pessoas);
+        List<Pessoa> lista = pessoaRepository.findAll();
+        return ResponseEntity.ok(lista);
     }
 
     @GetMapping("/pessoas/{id}")
-    public ResponseEntity<Pessoa> obterPessoaPorId(
-            @PathVariable("id") int id) {
-        Pessoa p = pessoas.stream().filter(pess -> pess.getId() == id)
-                .findAny().orElse(null);
-        if (p == null)
+    public ResponseEntity<Pessoa> obterPessoaPorId(@PathVariable("id") int id) {
+        Optional<Pessoa> op = pessoaRepository.findById(Integer.valueOf((id)));
+        if (op.isPresent()) {
+            return ResponseEntity.ok(op.get());
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        else
-            return ResponseEntity.ok(p);
+        }
     }
 
     @PostMapping("/pessoas")
     public ResponseEntity<Pessoa> inserirPessoa(@RequestBody Pessoa pessoa) {
-        Pessoa p = pessoas.stream().filter(
-                pess -> pess.getNome().equals(pessoa.getNome()))
-                .findAny().orElse(null);
-        if (p != null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        Optional<Pessoa> op = pessoaRepository.findByNome(pessoa.getNome());
+        if (op.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(op.get());
+        } else {
+            pessoa.setId(-1);
+            pessoaRepository.save(pessoa);
+            return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
         }
-        p = pessoas.stream().max(Comparator.comparing(Pessoa::getId))
-                .orElse(null);
-        if (p == null)
-            pessoa.setId(1);
-        else
-            pessoa.setId(p.getId() + 1);
-        pessoas.add(pessoa);
-        return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
     }
 
     @PutMapping("/pessoas/{id}")
-    public ResponseEntity<Pessoa> alterar(@PathVariable("id") int id,
-            @RequestBody Pessoa pessoa) {
-        Pessoa p = pessoas.stream().filter(pess -> pess.getId() == id)
-                .findAny().orElse(null);
-        if (p != null) {
-            p.setNome(pessoa.getNome());
-            p.setIdade(pessoa.getIdade());
-            p.setDataDeNascimento(pessoa.getDataDeNascimento());
-            p.setMotorista(pessoa.getMotorista());
-            return ResponseEntity.ok(p);
-        } else
+    public ResponseEntity<Pessoa> alterar(@PathVariable("id") int id, @RequestBody Pessoa pessoa) {
+        Optional<Pessoa> op = pessoaRepository.findById(Integer.valueOf((id)));
+        if (op.isPresent()) {
+            pessoa.setId(id);
+            pessoaRepository.save(pessoa);
+            return ResponseEntity.ok(pessoa);
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @DeleteMapping("/pessoas/{id}")
     public ResponseEntity<Pessoa> removerPessoa(@PathVariable("id") int id) {
-        Pessoa pessoa = pessoas.stream().filter(pess -> pess.getId() == id)
-                .findAny().orElse(null);
-        if (pessoa != null) {
-            pessoas.removeIf(p -> p.getId() == id);
-            return ResponseEntity.ok(pessoa);
+        Optional<Pessoa> op = pessoaRepository.findById(Integer.valueOf((id)));
+        if (op.isPresent()) {
+            pessoaRepository.delete(op.get());
+            return ResponseEntity.ok(op.get());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

@@ -30,3 +30,10 @@ cidade_end varchar(100) not null,
 estado_end varchar(2) not null,
 residencial_end boolean not null
 );
+
+create table tb_estado (
+id_estado integer primary key generated always as
+identity,
+nome_estado varchar(50) not null,
+sigla_estado varchar(50) not null
+);

@@ -18,6 +18,10 @@ export class EditarEnderecoComponent implements OnInit {
   // vêm para este atributo
   endereco: Endereco = new Endereco();
 
+  mensagem: string = "";
+  mensagem_detalhes: string = "";
+  botaoDesabilitado = false;
+
   constructor(
     private enderecoService: EnderecoService,
     private route: ActivatedRoute,
@@ -29,13 +33,36 @@ export class EditarEnderecoComponent implements OnInit {
     // Operador + (antes do this) converte para número
     let id = +this.route.snapshot.params['id'];
     // Com o id, obtém o endereço
+    /*
     const res = this.enderecoService.buscarPorId(id);
     if (res !== undefined)
       this.endereco = res;
     else
       throw new Error("Endereço não encontrado: id = " + id);
+    */
+
+    this.endereco.residencial = false;
+
+    this.enderecoService.buscarPorId(+id).subscribe({
+      next: (endereco) => {
+        if (endereco == null) {
+          this.mensagem = `Erro buscando endereco ${this.endereco.rua}, ${this.endereco.numero}, ${this.endereco.bairro}`;
+          this.mensagem_detalhes = `Endereco não encontrada ${this.endereco.rua}, ${this.endereco.numero}, ${this.endereco.bairro}`;
+          this.botaoDesabilitado = true;
+        } else {
+          this.endereco = endereco;
+          this.botaoDesabilitado = false;
+        }
+      },
+      error: (err) => {
+        this.mensagem = `Erro buscando endereco ${this.endereco.rua}, ${this.endereco.numero}, ${this.endereco.bairro}`;
+        this.mensagem_detalhes = `[${err.status}] ${err.message}`;
+        this.botaoDesabilitado = true;
+      }
+    });
   }
 
+  /*
   atualizar(): void {
     // Verifica se o formulário é válido
     if (this.formEndereco.form.valid) {
@@ -45,5 +72,17 @@ export class EditarEnderecoComponent implements OnInit {
       this.router.navigate(['/enderecos']);
     }
   }
+  */
 
+  atualizar(): void {
+    this.enderecoService.atualizar(this.endereco).subscribe({
+      next: (endereco) => {
+        this.router.navigate(["/enderecos"]);
+      },
+      error: (err) => {
+        this.mensagem = `Erro alterando endereço ${this.endereco.rua}, ${this.endereco.numero}, ${this.endereco.bairro}`;
+        this.mensagem_detalhes = `[${err.status}] ${err.message}`;
+      }
+    });
+  }
 }

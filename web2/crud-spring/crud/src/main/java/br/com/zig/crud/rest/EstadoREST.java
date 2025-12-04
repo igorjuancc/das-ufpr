@@ -25,13 +25,13 @@ public class EstadoREST {
     private EstadoRepository estadoRepository;
 
     @GetMapping("/estados")
-    public ResponseEntity<List<Estado>> obterTodosEnderecos() {
+    public ResponseEntity<List<Estado>> obterTodosEstados() {
         List<Estado> lista = estadoRepository.findAll();
         return ResponseEntity.ok(lista);
     }
 
     @GetMapping("/estados/{id}")
-    public ResponseEntity<Estado> obterPessoaPorId(@PathVariable("id") int id) {
+    public ResponseEntity<Estado> obterEstadoPorId(@PathVariable("id") int id) {
         Optional<Estado> op = estadoRepository.findById(Integer.valueOf((id)));
         if (op.isPresent()) {
             return ResponseEntity.ok(op.get());
@@ -41,7 +41,7 @@ public class EstadoREST {
     }
 
     @PostMapping("/estados")
-    public ResponseEntity<Estado> inserirEndereco(@RequestBody Estado estado) {
+    public ResponseEntity<Estado> inserirEstado(@RequestBody Estado estado) {
         Optional<Estado> op = estadoRepository.findByNome(estado.getNome());
         if (op.isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(op.get());
@@ -70,7 +70,7 @@ public class EstadoREST {
     }
 
     @DeleteMapping("/estados/{id}")
-    public ResponseEntity<Estado> removerPessoa(@PathVariable("id") int id) {
+    public ResponseEntity<Estado> removerEstado(@PathVariable("id") int id) {
         Optional<Estado> op = estadoRepository.findById(Integer.valueOf((id)));
         if (op.isPresent()) {
             estadoRepository.delete(op.get());

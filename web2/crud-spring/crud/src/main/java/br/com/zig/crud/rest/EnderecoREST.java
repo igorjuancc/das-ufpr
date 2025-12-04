@@ -31,7 +31,7 @@ public class EnderecoREST {
     }
 
     @GetMapping("/enderecos/{id}")
-    public ResponseEntity<Endereco> obterPessoaPorId(@PathVariable("id") int id) {
+    public ResponseEntity<Endereco> obterEnderecoPorId(@PathVariable("id") int id) {
         Optional<Endereco> op = enderecoRepository.findById(Integer.valueOf((id)));
         if (op.isPresent()) {
             return ResponseEntity.ok(op.get());
@@ -60,7 +60,7 @@ public class EnderecoREST {
     }
 
     @DeleteMapping("/enderecos/{id}")
-    public ResponseEntity<Endereco> removerPessoa(@PathVariable("id") int id) {
+    public ResponseEntity<Endereco> removerEndereco(@PathVariable("id") int id) {
         Optional<Endereco> op = enderecoRepository.findById(Integer.valueOf((id)));
         if (op.isPresent()) {
             enderecoRepository.delete(op.get());

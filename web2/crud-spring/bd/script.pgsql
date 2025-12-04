@@ -37,3 +37,10 @@ identity,
 nome_estado varchar(50) not null,
 sigla_estado varchar(50) not null
 );
+
+create table tb_cidade (
+id_cidade integer primary key generated always as
+identity,
+nome_cidade varchar(50) not null,
+id_estado_cidade integer not null references tb_estado (id_estado)
+);

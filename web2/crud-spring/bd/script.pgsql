@@ -17,3 +17,16 @@ idade_pes integer not null,
 data_pes date not null,
 motorista_pes varchar(10) not null
 );
+
+create table tb_endereco (
+id_end integer primary key generated always as
+identity,
+rua_end varchar(100) not null,
+numero_end integer not null,
+complemento_end varchar(100) not null,
+bairro_end varchar(100) not null,
+cep_end varchar(8) not null,
+cidade_end varchar(100) not null,
+estado_end varchar(2) not null,
+residencial_end boolean not null
+);

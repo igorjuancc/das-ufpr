@@ -19,6 +19,8 @@ export class InserirCidadeComponent implements OnInit {
   // vêm para este atributo
   cidade: Cidade = new Cidade();
   estados: Estado[] = [];
+  mensagem: string = "";
+  mensagem_detalhes: string = "";
 
   // Deve-se injetar no construtor:
   // - service, para efetuar a operação
@@ -29,7 +31,7 @@ export class InserirCidadeComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.estados = this.estadoService.listarTodos();
+    this.estados = this.listarTodosEstados();
   }
 
   // Para inserir:
@@ -37,10 +39,44 @@ export class InserirCidadeComponent implements OnInit {
   // - Se OK
   // . Chama o inserir do Service, this.pessoa está preenchida (binding)
   // . Redireciona para /cidades
+  /*
   inserir(): void {
     if (this.formCidade.form.valid) {
       this.cidadeService.inserir(this.cidade);
       this.router.navigate(["/cidades"]);
     }
+  }
+  */
+
+  inserir(): void {
+    if (this.formCidade.form.valid) {
+      this.cidadeService.inserir(this.cidade).subscribe({
+        next: (cidade) => {
+          this.router.navigate(["/cidades"]);
+        },
+        error: (err) => {
+          this.mensagem = `Erro inserindo cidade ${this.cidade.nome} - ${this.cidade.estado?.nome}`;
+          this.mensagem_detalhes = `[${err.status}] ${err.message}`;
+        }
+      });
+    }
+  }
+
+  listarTodosEstados(): Estado[] {
+    this.estadoService.listarTodos().subscribe({
+      next: (data: Estado[] | null) => {
+        if (data == null) {
+          this.estados = [];
+        }
+        else {
+          this.estados = data;
+        }
+      },
+      error: (err) => {
+        this.mensagem = "Erro buscando lista de estados";
+        this.mensagem_detalhes = `[${err.status}] ${err.message}`;
+      }
+    });
+    return this.estados;
   }
 }

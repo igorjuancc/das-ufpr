@@ -12,6 +12,8 @@ import { ModalCidadeComponent } from '../modal-cidade';
 })
 export class ListarCidadeComponent implements OnInit {
   cidades: Cidade[] = [];
+  mensagem: string = "";
+  mensagem_detalhes: string = "";
 
   constructor(private cidadeService: CidadeService,
     private modalService: NgbModal
@@ -21,23 +23,61 @@ export class ListarCidadeComponent implements OnInit {
     this.cidades = this.listarTodas();
   }
 
+  /*
   listarTodas(): Cidade[] {
-    /*
+    
     return [
       new Cidade(1, "Curitiba", "Paraná"),
       new Cidade(1, "Pinhais", "Paraná"),
       new Cidade(1, "Florianópolis", "Santa Catarina")
     ];
-    */
+    
 
     return this.cidadeService.listarTodas();
   }
+  */
 
+  listarTodas(): Cidade[] {
+    this.cidadeService.listarTodas().subscribe({
+      next: (data: Cidade[] | null) => {
+        if (data == null) {
+          this.cidades = [];
+        }
+        else {
+          this.cidades = data;
+        }
+      },
+      error: (err) => {
+        this.mensagem = "Erro buscando lista de cidades";
+        this.mensagem_detalhes = `[${err.status}] ${err.message}`;
+      }
+    });
+    return this.cidades;
+  }
+
+  /*
   remover($event: any, cidade: Cidade): void {
     $event.preventDefault();
     if (confirm(`Deseja realmente remover a cidade ${cidade.nome} - ${cidade.estado}?`)) {
       this.cidadeService.remover(cidade.id!);
       this.cidades = this.listarTodas();
+    }
+  }
+  */
+
+  remover($event: any, cidade: Cidade): void {
+    $event.preventDefault();
+    this.mensagem = "";
+    this.mensagem_detalhes = "";
+    if (confirm(`Deseja realmente remover a cidade ${cidade.nome} - ${cidade.estado?.sigla}?`)) {
+      this.cidadeService.remover(+cidade.id!).
+        subscribe({
+          complete: () => { this.listarTodas(); },
+          error: (err) => {
+            this.mensagem = `Erro removendo cidade ${cidade.nome} - ${cidade.estado?.sigla}`;
+            this.mensagem_detalhes = `[${err.status}] ${err.message}`;
+          }
+        });
     }
   }
 

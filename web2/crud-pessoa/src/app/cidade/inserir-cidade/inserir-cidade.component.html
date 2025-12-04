@@ -1,4 +1,10 @@
 <h1>Nova Cidade</h1>
+<div *ngIf="mensagem.length>0" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <h4 class="alert-heading">{{mensagem}}</h4>
+    <p>{{mensagem_detalhes}}</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close">
+    </button>
+</div>
 <div class="well">
     <form #formCidade="ngForm">
         <div class="form-group">
@@ -13,7 +19,7 @@
         <div class="form-group">
             <label for="estado">Estado:</label>
             <ng-select name="estado" [items]="estados" bindLabel="sigla" [(ngModel)]="cidade.estado"
-                placeholder="Selecione um estado">
+                placeholder="Selecione um estado" required>
             </ng-select>
         </div>
         <div class="form-group">

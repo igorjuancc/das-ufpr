@@ -16,6 +16,7 @@ Repositório para armazenamento de projetos e atividades desenvolvidos na Especi
     * [Projeto CRUD Pessoa Front-End](https://github.com/igorjuancc/das-ufpr/tree/main/web2/crud-pessoa)
     * [Projeto CRUD Pessoa Back-End](https://github.com/igorjuancc/das-ufpr/tree/main/web2/crud-spring)
     * [Exemplos Programação Reativa](https://github.com/igorjuancc/das-ufpr/tree/main/web2/programacao-reativa)
+* [Autor](#Autor) 
 <!--te-->
 
 # Autor

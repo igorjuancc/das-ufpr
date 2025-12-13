@@ -1,4 +1,4 @@
-# CRUD Cadastro de Pessoas 
+# CRUD Cadastro de Pessoas (Front-End)
 Implementação de exercíco prático para criação de um CRUD de dados de pessoa(s), estado(s), cidade(s) e endereço.
 O objetivo dessa atividade é a implementação de conceitos de desenvolvimento web com foco principal no front-end com a utilização do framework de aplicação [Angular](https://angular.dev/) juntamente com o framework de interface [Bootstrap](https://getbootstrap.com/).
 

@@ -6,9 +6,9 @@ Repositório para armazenamento de projetos e atividades desenvolvidos na discip
 <!--ts-->
 * [Resumo](#Atividades-WEB2-Desenvolvimento-WEB-II)
 * [Índice](#Índice)
-* [Projeto CRUD Pessoa Front-End](https://github.com/igorjuancc/das-ufpr/tree/main/web2/crud-pessoa)
-* [Projeto CRUD Pessoa Back-End](https://github.com/igorjuancc/das-ufpr/tree/main/web2/crud-spring)
-* [Exemplos Programação Reativa](https://github.com/igorjuancc/das-ufpr/tree/main/web2/programacao-reativa)
+* [Projeto CRUD Pessoa Front-End](https://github.com/igorjuancc/das-ufpr/tree/main/web2/crud-pessoa) (Angular + Bootstrap)
+* [Projeto CRUD Pessoa Back-End](https://github.com/igorjuancc/das-ufpr/tree/main/web2/crud-spring) (Java + Spring Boot)
+* [Exemplos Programação Reativa](https://github.com/igorjuancc/das-ufpr/tree/main/web2/programacao-reativa) (TypeScript)
 * [Autor](#Autor) 
 <!--te-->
 

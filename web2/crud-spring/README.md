@@ -8,9 +8,9 @@ Os endpoints disponibilizados são utilizados para integrar a aplicação com o 
 - **Java:** OpenJDK 21.0.8  
 - **Maven:** 3.8.7  
 - **PostgreSQL:** 16
-- **Visual Studio Code:**
+- **Visual Studio Code**
 - Extensão **Spring Boot Extension Pack** instalada no VS Code
-- Criar uma base de dados com o nome **crud** e executar os comando do script presente na pasta bd desse projeto.
+- Criar uma base de dados com o nome **crud** e executar os comando do script presente na pasta bd desse projeto
 
 # Execução
 ```

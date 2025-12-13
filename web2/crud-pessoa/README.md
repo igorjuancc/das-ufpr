@@ -1,6 +1,6 @@
 # CRUD Cadastro de Pessoas 
 Implementação de exercíco prático para criação de um CRUD de dados de pessoa(s), estado(s), cidade(s) e endereço.
-O objetivo dessa atividade é a implementação de conceitos de desenvolvimento web com foco principal no front-end com a utilização do framework [Angular](https://angular.dev/).
+O objetivo dessa atividade é a implementação de conceitos de desenvolvimento web com foco principal no front-end com a utilização do framework de aplicação [Angular](https://angular.dev/) juntamente com o framework de interface [Bootstrap](https://getbootstrap.com/).
 
 O projeto adota uma arquitetura modular baseada em funcionalidades, conforme recomendado pela documentação oficial do Angular. As funcionalidades são organizadas por domínios, promovendo separação de responsabilidades, alta coesão e baixo acoplamento, alinhando-se a princípios do Domain-Driven Design (DDD) e a boas práticas de arquiteturas modernas de aplicações SPA (Single Page Applications).
 

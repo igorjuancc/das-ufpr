@@ -1,10 +1,34 @@
 # CRUD Cadastro de Pessoas (Back-End)
+Implementação de exercíco prático para criação de uma API REST para o CRUD de dados de pessoa(s), estado(s), cidade(s) e endereço. O objetivo dessa atividade é a implementação de conceitos de desenvolvimento web com foco principal no back-end com a utilização do Java EE juntamente com o framework Spring e a biblioteca Java Lombok. Para persistência dos dados são utilizados Spring Data JPA com o banco de dados PostgresSQL.
+
+Os endpoints disponibilizados são utilizados para integrar a aplicação com o projeto [CRUD Pessoa Front-End](https://github.com/igorjuancc/das-ufpr/tree/main/web2/crud-pessoa).
 
 # Pré-requisitos
 
-# Execução
+- **Java:** OpenJDK 21.0.8  
+- **Maven:** 3.8.7  
+- **PostgreSQL:** 16
+- **Visual Studio Code:**
+- Extensão **Spring Boot Extension Pack** instalada no VS Code
+- Criar uma base de dados com o nome **crud** e executar os comando do script presente na pasta bd desse projeto.
 
-# Etapas de Implementação
+# Execução
+```
+# clonar o repositório (ou realizar o download)
+git clone https://github.com/igorjuancc/das-ufpr/tree/main/web2/crud-spring
+
+# acessar a pasta raiz do projeto
+cd /das-ufpr/web2/crud-spring
+
+# instalar as dependências do projeto
+mvn clean install
+
+# executar a aplicação
+
+# No painel lateral do VS Code, acesse a aba Spring Boot Dashboard.
+# Localize a aplicação listada no dashboard.
+# Clique no botão Run para iniciar a aplicação.
+```
 
 # Sobre
 

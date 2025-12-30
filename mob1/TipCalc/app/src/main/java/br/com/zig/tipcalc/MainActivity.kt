@@ -26,6 +26,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var tipCustomEditText: EditText
     lateinit var totalCustomEditText: EditText
     lateinit var customTipTextView: TextView
+    var currentPeopleNumber: Int = 1
+    lateinit var peopleTextView: TextView
+    lateinit var valuePeopleTextNumber: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,12 +50,20 @@ class MainActivity : AppCompatActivity() {
         tipCustomEditText = findViewById<EditText>(R.id.tipCustomEditText)
         totalCustomEditText = findViewById<EditText>(R.id.totalCustomEditText)
         customTipTextView = findViewById<EditText>(R.id.customTipTextView)
+        valuePeopleTextNumber = findViewById<EditText>(R.id.valuePeopleTextNumber)
 
         val customSeekBar = findViewById<SeekBar>(R.id.customSeekBar)
         currentCustomPercent = customSeekBar.progress
 
         billEditText.addTextChangedListener(billTextWatcher)
         customSeekBar.setOnSeekBarChangeListener(customSeekBarListener)
+
+        val peolpleSeekBar = findViewById<SeekBar>(R.id.peopleSeekBar)
+        currentPeopleNumber = peolpleSeekBar.progress
+
+        peolpleSeekBar.setOnSeekBarChangeListener(peopleSeekBarListener)
+
+        peopleTextView = findViewById<EditText>(R.id.peopleTextView)
     }
 
     @SuppressLint("DefaultLocale")
@@ -80,6 +91,7 @@ class MainActivity : AppCompatActivity() {
 
         tipCustomEditText.setText(String.format("%.02f", customTipAmount))
         totalCustomEditText.setText(String.format("%.02f", customTotalAmount))
+        valueForPerson(customTotalAmount)
     }
 
     private val customSeekBarListener = object : SeekBar.OnSeekBarChangeListener {
@@ -93,6 +105,25 @@ class MainActivity : AppCompatActivity() {
 
         override fun onStopTrackingTouch(seekBar: SeekBar?) {
         }
+    }
+
+    private val peopleSeekBarListener = object : SeekBar.OnSeekBarChangeListener {
+        override fun onProgressChanged(
+            seekBar: SeekBar?,
+            progress: Int,
+            fromUser: Boolean
+        ) {
+            peopleTextView.text = progress.toString()
+            currentPeopleNumber = progress
+            updateCustom()
+        }
+
+        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+        }
+
+        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+        }
+
     }
 
     private val billTextWatcher = object : TextWatcher {
@@ -121,5 +152,16 @@ class MainActivity : AppCompatActivity() {
             updateStandard()
             updateCustom()
         }
+    }
+
+    @SuppressLint("DefaultLocale")
+    fun valueForPerson(valueTotal : Double) {
+        var value : Double = 0.0
+        try {
+            value = valueTotal / currentPeopleNumber
+        } catch (e: NumberFormatException) {
+            value = 0.0
+        }
+        valuePeopleTextNumber.setText(String.format("%.02f", value))
     }
 }

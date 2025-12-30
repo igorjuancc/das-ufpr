@@ -21,6 +21,12 @@ class DetailActivity : AppCompatActivity() {
         }
 
         val closeButtom = findViewById<Button>(R.id.closeButton)
+        val bundle = intent.extras
+        //if(bundle != null) {
+            println(bundle?.getString("userName"))
+            println(bundle?.getInt("n1Peso"))
+            println(bundle?.getDouble("n1"))
+        //}
         closeButtom.setOnClickListener() {
             finish()
         }

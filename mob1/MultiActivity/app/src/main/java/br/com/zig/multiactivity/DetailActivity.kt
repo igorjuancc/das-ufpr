@@ -1,6 +1,7 @@
 package br.com.zig.multiactivity
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
@@ -23,10 +24,25 @@ class DetailActivity : AppCompatActivity() {
         val closeButtom = findViewById<Button>(R.id.closeButton)
         val bundle = intent.extras
         //if(bundle != null) {
+        /*
             println(bundle?.getString("userName"))
             println(bundle?.getInt("n1Peso"))
             println(bundle?.getDouble("n1"))
+        */
         //}
+
+        val user = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            println("VERSAO NOVA")
+            bundle?.getParcelable("user", User::class.java)
+        }else{
+            println("VERSAO VELHA")
+            bundle?.getParcelable("user")
+        }
+
+        println(user?.userName)
+        println(user?.n1Peso)
+        println(user?.n1)
+
         closeButtom.setOnClickListener() {
             finish()
         }

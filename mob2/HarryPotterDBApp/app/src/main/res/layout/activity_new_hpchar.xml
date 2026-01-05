@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:visibility="visible">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:text="Personagem"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:textSize="20sp" />
+    <EditText
+        android:id="@+id/etHouse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Casa"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:textSize="20sp" />
+    <EditText
+        android:id="@+id/etAncestry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ancestralidade"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:textSize="20sp" />
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="saveChar"
+        android:text="Salvar"
+        android:textSize="24sp" />
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="deleteChar"
+        android:text="Excluir"
+        android:textSize="24sp"
+        android:visibility="gone" />
+</LinearLayout>
